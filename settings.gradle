@@ -1,0 +1,8 @@
+include ':app', ':player', ':computer', ':basic-component', ':service-component', ':lib-component', ':build-gradle'
+
+//以下内容与组件化架构无关，只为测试学习gradle
+//在settings.gradle中，则输出"In settings,gradle id is"
+println "In posdevice, gradle id is " +gradle.hashCode()
+println "Home Dir:" + gradle.gradleHomeDir
+println "User Home Dir:" + gradle.gradleUserHomeDir
+println "Parent: " + gradle.parent
