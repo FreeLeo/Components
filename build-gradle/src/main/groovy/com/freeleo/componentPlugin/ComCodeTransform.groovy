@@ -6,6 +6,7 @@ import javassist.*
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.io.FileUtils
 import org.gradle.api.Project
+import com.google.common.collect.ImmutableSet
 
 class ComCodeTransform extends Transform {
 
@@ -171,7 +172,23 @@ class ComCodeTransform extends Transform {
 
     @Override
     Set<? super QualifiedContent.Scope> getScopes() {
-        return TransformManager.SCOPE_FULL_PROJECT
+        def name = QualifiedContent.Scope.PROJECT_LOCAL_DEPS.name()
+        def deprecated = QualifiedContent.Scope.PROJECT_LOCAL_DEPS.getClass()
+                .getField(name).getAnnotation(Deprecated.class)
+
+        if (deprecated == null) {
+            println "cannot find QualifiedContent.Scope.PROJECT_LOCAL_DEPS Deprecated.class "
+            return ImmutableSet.<QualifiedContent.Scope> of(QualifiedContent.Scope.PROJECT
+                    , QualifiedContent.Scope.PROJECT_LOCAL_DEPS
+                    , QualifiedContent.Scope.EXTERNAL_LIBRARIES
+                    , QualifiedContent.Scope.SUB_PROJECTS
+                    , QualifiedContent.Scope.SUB_PROJECTS_LOCAL_DEPS)
+        } else {
+            println "find QualifiedContent.Scope.PROJECT_LOCAL_DEPS Deprecated.class "
+            return ImmutableSet.<QualifiedContent.Scope> of(QualifiedContent.Scope.PROJECT
+                    , QualifiedContent.Scope.EXTERNAL_LIBRARIES
+                    , QualifiedContent.Scope.SUB_PROJECTS)
+        }
     }
 
     @Override

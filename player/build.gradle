@@ -46,3 +46,7 @@ dependencies {
 repositories {
     mavenCentral()
 }
+componentExtension{
+    isRegisterCompoAuto=false
+    applicationName='com.freeleo.player.applicationLike.PlayerAppLike'
+}
