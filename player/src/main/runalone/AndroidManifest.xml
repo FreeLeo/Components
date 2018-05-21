@@ -2,7 +2,7 @@
     package="com.freeleo.player" >
     <application
         android:allowBackup="true"
-        android:label="@string/app_name"
+        android:label="@string/player_app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         <activity android:name=".PlayerActivity">
