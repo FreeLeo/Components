@@ -8,10 +8,10 @@ import com.freeleo.service_component.computer.ComputerService
 class ComputerAppLike: IApplicationLike {
     var router = Router.get()
     override fun onCreate() {
-        router.addService(ComputerService::javaClass.name,ComputerServiceImpl())
+        router.addService(ComputerService::class.java.name,ComputerServiceImpl())
     }
 
     override fun onStop() {
-        router.removeService(ComputerService::javaClass.name)
+        router.removeService(ComputerService::class.java.name)
     }
 }
